@@ -1,10 +1,9 @@
 {
   "expo": {
-    "name": "nv-commbook",
     "slug": "nv-commbook",
-    "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
-  }
+    "name": "nv-commbook",
+    "sdkVersion": "47.0.0",
+    "entryPoint": ".vscode\\exponentIndex.js"
+  },
+  "name": "nv-commbook"
 }

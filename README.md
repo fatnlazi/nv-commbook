@@ -1,12 +1,12 @@
-# 1. Download app Expo Go for your mobilephone
+# 1. Download app Expo Go for your mobile phone
 
-### For IOS
+## For IOS
 
 - Go to **App Store**
 - Search for **Expo Go**
 - Install the app
 
-### For Android
+## For Android
 
 - Go to **Google Play**
 - Search for **Expo**
@@ -15,7 +15,8 @@
 # 2. Open the application
 
 - Open your browser
-- Paste this link: exp://exp.host/@fatnlazi/project-app-nhanvan?release-channel=default
+- Paste this link: exp://exp.host/@fatnlazi/nv-commbook?release-channel=default
 
 ## Reference
-- https://expo.dev/@fatnlazi/project-app-nhanv
+
+- <https://expo.dev/@fatnlazi/project-app-nhanv>
