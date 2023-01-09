@@ -7,8 +7,10 @@ import {
   TextInputEndEditingEventData,
   View,
 } from 'react-native';
+import TextView from './src/components/TextView';
 import ButtonView from './src/components/ButtonView';
 import TextInputView from './src/components/TextInputView';
+import * as styles from './src/styles';
 
 export default function App() {
   const [text, setText] = useState('');
@@ -22,40 +24,42 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styleView.container}>
       <StatusBar style="auto" />
       <Text>Open up App.js to start working on your app!</Text>
 
       <TextInputView
         styleView={{
-          height: 64,
+          height: 32,
           width: 256,
-          borderWidth: 1,
-          borderRadius: 8,
           margin: 8,
-        }}
-        styleText={{
-          fontSize: 64 * 0.6,
         }}
         onEndEditing={onEndEditingTextInput}
       />
 
       <ButtonView
         styleView={{
-          height: 64,
+          height: 32,
           width: 256,
-          borderWidth: 1,
-          borderRadius: 8,
           margin: 8,
         }}
-      >
-        <Text>{'Hello World'}</Text>
-      </ButtonView>
+        text={'HELLO'}
+      ></ButtonView>
+
+      <TextView
+        styleView={{
+          height: 32,
+          width: 256,
+          margin: 8,
+          ...styles.border.on,
+        }}
+        text={'HELLO'}
+      />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const styleView = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',

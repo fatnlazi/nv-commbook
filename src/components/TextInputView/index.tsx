@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   LayoutChangeEvent,
   NativeSyntheticEvent,
@@ -9,6 +9,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import * as styles from '../../styles';
 
 export default function TextInputView({
   styleView = {},
@@ -23,29 +24,29 @@ export default function TextInputView({
     | ((event: NativeSyntheticEvent<TextInputEndEditingEventData>) => void)
     | undefined;
 }) {
-  const sty = StyleSheet.create({
+  const [fontSize, setFontSize] = useState(16);
+
+  const style = StyleSheet.create({
     view: {
-      alignItems: 'center',
-      alignContent: 'center',
-      justifyContent: 'center',
+      ...styles.text.view,
       ...styleView,
     },
     text: {
-      height: '96%',
-      width: '92%',
+      ...styles.text.text,
       ...styleText,
+      fontSize: fontSize,
     },
   });
 
   const onLayoutView = (event: LayoutChangeEvent) => {
     const height = event.nativeEvent.layout.height;
-    sty.text.fontSize = height;
+    setFontSize(height * 0.7);
   };
 
   return (
-    <View style={sty.view} onLayout={onLayoutView}>
+    <View style={style.view} onLayout={onLayoutView}>
       <TextInput
-        style={sty.text}
+        style={style.text}
         placeholder={placeholder}
         onEndEditing={onEndEditing}
       />

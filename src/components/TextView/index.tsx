@@ -1,35 +1,31 @@
 import React, { useState } from 'react';
 import {
-  GestureResponderEvent,
   LayoutChangeEvent,
   StyleSheet,
   Text,
   TextStyle,
-  TouchableOpacity,
   View,
   ViewStyle,
 } from 'react-native';
 import * as styles from '../../styles';
 
-export default function ButtonView({
+export default function TextView({
   styleView = {},
   styleText = {},
   text = '',
-  onPress = undefined,
-  children = undefined,
 }: {
   styleView?: ViewStyle;
   styleText?: TextStyle;
   text?: string;
-  onPress?: ((event: GestureResponderEvent) => void) | undefined;
-  children?: React.ReactNode | undefined;
 }) {
   const [fontSize, setFontSize] = useState(16);
 
   const style = StyleSheet.create({
     view: {
-      ...styles.button.view,
+      ...styles.text.view,
+      ...styles.border.off,
       ...styleView,
+      backgroundColor: undefined,
     },
     text: {
       ...styles.text.text,
@@ -44,11 +40,8 @@ export default function ButtonView({
   };
 
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={style.view} onLayout={onLayoutView}>
-        {text ? <Text style={style.text}>{text}</Text> : undefined}
-        {children}
-      </View>
-    </TouchableOpacity>
+    <View style={style.view} onLayout={onLayoutView}>
+      <Text style={style.text}>{text}</Text>
+    </View>
   );
 }
