@@ -16,6 +16,7 @@ export default function TextInputView({
   styleText = {},
   placeholder = undefined,
   onEndEditing = undefined,
+  onLayout = undefined,
 }: {
   styleView?: ViewStyle;
   styleText?: TextStyle;
@@ -23,6 +24,7 @@ export default function TextInputView({
   onEndEditing?:
     | ((event: NativeSyntheticEvent<TextInputEndEditingEventData>) => void)
     | undefined;
+  onLayout?: ((event: LayoutChangeEvent) => void) | undefined;
 }) {
   const [fontSize, setFontSize] = useState(16);
 
@@ -38,13 +40,13 @@ export default function TextInputView({
     },
   });
 
-  const onLayoutView = (event: LayoutChangeEvent) => {
-    const height = event.nativeEvent.layout.height;
-    setFontSize(height * 0.7);
-  };
+  // const onLayoutView = (event: LayoutChangeEvent) => {
+  //   const height = event.nativeEvent.layout.height;
+  //   setFontSize(height * 0.7);
+  // };
 
   return (
-    <View style={style.view} onLayout={onLayoutView}>
+    <View style={style.view} onLayout={onLayout}>
       <TextInput
         style={style.text}
         placeholder={placeholder}

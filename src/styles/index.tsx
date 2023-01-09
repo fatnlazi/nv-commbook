@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const flex = StyleSheet.create({
   center: {
+    alignItem: 'center',
     alignContent: 'center',
     justifyContent: 'center',
   },

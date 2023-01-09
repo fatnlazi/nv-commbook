@@ -10,6 +10,7 @@
     "airbnb/hooks",
     "eslint:recommended",
     "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommend",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "prettier"
