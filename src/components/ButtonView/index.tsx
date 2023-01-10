@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import * as styles from '../../styles';
 
-export default function ButtonView({
+const ButtonView = ({
   styleView = {},
   styleText = {},
   text = '',
@@ -23,7 +23,7 @@ export default function ButtonView({
   text?: string;
   onPress?: ((event: GestureResponderEvent) => void) | undefined;
   children?: React.ReactNode | undefined;
-}) {
+}) => {
   const [fontSize, setFontSize] = useState(16);
 
   const style = StyleSheet.create({
@@ -33,14 +33,14 @@ export default function ButtonView({
     },
     text: {
       ...styles.text.text,
-      ...styleText,
       fontSize: fontSize,
+      ...styleText,
     },
   });
 
   const onLayoutView = (event: LayoutChangeEvent) => {
     const height = event.nativeEvent.layout.height;
-    setFontSize(height * 0.7);
+    setFontSize(height * 0.66);
   };
 
   return (
@@ -51,4 +51,6 @@ export default function ButtonView({
       </View>
     </TouchableOpacity>
   );
-}
+};
+
+export default ButtonView;

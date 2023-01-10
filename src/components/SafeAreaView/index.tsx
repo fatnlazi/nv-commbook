@@ -1,5 +1,11 @@
 import React, { memo } from 'react';
-import { LayoutChangeEvent, StyleSheet, View, ViewStyle } from 'react-native';
+import {
+  LayoutChangeEvent,
+  StatusBar,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
 import { SafeAreaView as OrgSafeAreaView } from 'react-native-safe-area-context';
 import * as styles from '../../styles';
 
@@ -16,6 +22,7 @@ const SafeAreaView = ({
     safe: {
       ...styles.flex.column,
       ...styles.flex.center,
+      ...styles.border.roundOn,
       flex: 1,
       height: '100%',
       width: '100%',
@@ -24,6 +31,7 @@ const SafeAreaView = ({
     view: {
       ...styles.flex.column,
       ...styles.flex.center,
+      ...styles.border.roundOn,
       height: '100%',
       width: '100%',
       ...styleView,
@@ -32,6 +40,7 @@ const SafeAreaView = ({
 
   return (
     <OrgSafeAreaView style={style.safe}>
+      <StatusBar barStyle={'dark-content'} />
       <View onLayout={onLayoutView} style={style.view}>
         {children}
       </View>

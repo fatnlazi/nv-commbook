@@ -2,11 +2,12 @@ import { StyleSheet } from 'react-native';
 
 export const flex = StyleSheet.create({
   center: {
-    alignItem: 'center',
+    alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
   },
   start: {
+    alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'flex-start',
   },
@@ -14,6 +15,7 @@ export const flex = StyleSheet.create({
     alignSelf: 'center',
   },
   end: {
+    alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'flex-end',
   },
@@ -97,9 +99,27 @@ export const text = StyleSheet.create({
     ...flex.centerSelf,
     ...border.off,
     ...border.roundOn,
-    height: '94%',
+    // height: '94%',
     width: '94%',
     textAlign: 'center',
     color: '#000000',
+  },
+});
+
+export const margin = StyleSheet.create({
+  on: {
+    margin: 8,
+  },
+  off: {
+    margin: 0,
+  },
+});
+
+export const padding = StyleSheet.create({
+  on: {
+    padding: 8,
+  },
+  off: {
+    padding: 0,
   },
 });
