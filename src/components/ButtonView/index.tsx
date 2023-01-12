@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import {
   GestureResponderEvent,
   LayoutChangeEvent,
@@ -11,19 +11,23 @@ import {
 } from 'react-native';
 import * as styles from '../../styles';
 
+export type ButtonViewProps = {
+  styleView?: ViewStyle;
+  styleText?: TextStyle;
+  text?: string;
+  onPress?: ((event: GestureResponderEvent) => void) | undefined;
+  onLayout?: ((event: LayoutChangeEvent) => void) | undefined;
+  children?: React.ReactNode | undefined;
+};
+
 const ButtonView = ({
   styleView = {},
   styleText = {},
   text = '',
   onPress = undefined,
+  onLayout = undefined,
   children = undefined,
-}: {
-  styleView?: ViewStyle;
-  styleText?: TextStyle;
-  text?: string;
-  onPress?: ((event: GestureResponderEvent) => void) | undefined;
-  children?: React.ReactNode | undefined;
-}) => {
+}: ButtonViewProps) => {
   const [fontSize, setFontSize] = useState(16);
 
   const style = StyleSheet.create({
@@ -33,19 +37,19 @@ const ButtonView = ({
     },
     text: {
       ...styles.text.text,
-      fontSize: fontSize,
+      fontSize,
       ...styleText,
     },
   });
 
   const onLayoutView = (event: LayoutChangeEvent) => {
-    const height = event.nativeEvent.layout.height;
+    const { height } = event.nativeEvent.layout;
     setFontSize(height * 0.66);
   };
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={style.view} onLayout={onLayoutView}>
+      <View style={style.view} onLayout={onLayout || onLayoutView}>
         {text ? <Text style={style.text}>{text}</Text> : undefined}
         {children}
       </View>
@@ -53,4 +57,4 @@ const ButtonView = ({
   );
 };
 
-export default ButtonView;
+export default memo(ButtonView);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import {
   LayoutChangeEvent,
   NativeSyntheticEvent,
@@ -11,13 +11,7 @@ import {
 } from 'react-native';
 import * as styles from '../../styles';
 
-export default function TextInputView({
-  styleView = {},
-  styleText = {},
-  placeholder = undefined,
-  onEndEditing = undefined,
-  onLayout = undefined,
-}: {
+export type TextInputViewProps = {
   styleView?: ViewStyle;
   styleText?: TextStyle;
   placeholder?: string | undefined;
@@ -25,7 +19,15 @@ export default function TextInputView({
     | ((event: NativeSyntheticEvent<TextInputEndEditingEventData>) => void)
     | undefined;
   onLayout?: ((event: LayoutChangeEvent) => void) | undefined;
-}) {
+};
+
+const TextInputView = ({
+  styleView = {},
+  styleText = {},
+  placeholder = undefined,
+  onEndEditing = undefined,
+  onLayout = undefined,
+}: TextInputViewProps) => {
   const [fontSize, setFontSize] = useState(16);
 
   const style = StyleSheet.create({
@@ -36,17 +38,17 @@ export default function TextInputView({
     text: {
       ...styles.text.text,
       ...styleText,
-      fontSize: fontSize,
+      fontSize,
     },
   });
 
-  // const onLayoutView = (event: LayoutChangeEvent) => {
-  //   const height = event.nativeEvent.layout.height;
-  //   setFontSize(height * 0.7);
-  // };
+  const onLayoutView = (event: LayoutChangeEvent) => {
+    const { height } = event.nativeEvent.layout;
+    setFontSize(height * 0.7);
+  };
 
   return (
-    <View style={style.view} onLayout={onLayout}>
+    <View style={style.view} onLayout={onLayout || onLayoutView}>
       <TextInput
         style={style.text}
         placeholder={placeholder}
@@ -54,4 +56,6 @@ export default function TextInputView({
       />
     </View>
   );
-}
+};
+
+export default memo(TextInputView);

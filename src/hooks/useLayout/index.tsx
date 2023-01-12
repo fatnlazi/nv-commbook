@@ -5,8 +5,8 @@ const useLayout = () => {
   const [layout, setLayout] = useState<LayoutRectangle>({} as LayoutRectangle);
 
   const onLayout = useCallback((event: LayoutChangeEvent) => {
-    const layout: LayoutRectangle = event.nativeEvent.layout;
-    setLayout(layout);
+    const lo: LayoutRectangle = event.nativeEvent.layout;
+    setLayout(lo);
   }, []);
 
   return [layout, onLayout] as const;

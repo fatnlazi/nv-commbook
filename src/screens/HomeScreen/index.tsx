@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import SafeAreaView from '../../components/SafeAreaView';
@@ -23,4 +23,4 @@ const HomeScreen = () => {
   );
 };
 
-export default memo(HomeScreen);
+export default HomeScreen;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import {
   LayoutChangeEvent,
   StyleSheet,
@@ -9,16 +9,20 @@ import {
 } from 'react-native';
 import * as styles from '../../styles';
 
-export default function TextView({
-  styleView = {},
-  styleText = {},
-  text = '',
-}: {
+export type TextViewProps = {
   styleView?: ViewStyle;
   styleText?: TextStyle;
   text?: string;
-}) {
-  const [fontSize, setFontSize] = useState(16);
+  onLayout?: ((event: LayoutChangeEvent) => void) | undefined;
+};
+
+const TextView = ({
+  styleView = {},
+  styleText = {},
+  text = '',
+  onLayout = undefined,
+}: TextViewProps) => {
+  const [fontSize, setFontSize] = useState<number>(16);
 
   const style = StyleSheet.create({
     view: {
@@ -30,18 +34,20 @@ export default function TextView({
     text: {
       ...styles.text.text,
       ...styleText,
-      fontSize: fontSize,
+      fontSize,
     },
   });
 
   const onLayoutView = (event: LayoutChangeEvent) => {
-    const height = event.nativeEvent.layout.height;
+    const { height } = event.nativeEvent.layout;
     setFontSize(height * 0.7);
   };
 
   return (
-    <View style={style.view} onLayout={onLayoutView}>
+    <View style={style.view} onLayout={onLayout || onLayoutView}>
       <Text style={style.text}>{text}</Text>
     </View>
   );
-}
+};
+
+export default memo(TextView);

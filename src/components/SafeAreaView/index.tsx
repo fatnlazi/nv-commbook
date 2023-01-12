@@ -40,7 +40,7 @@ const SafeAreaView = ({
 
   return (
     <OrgSafeAreaView style={style.safe}>
-      <StatusBar barStyle={'dark-content'} />
+      <StatusBar barStyle="dark-content" />
       <View onLayout={onLayoutView} style={style.view}>
         {children}
       </View>

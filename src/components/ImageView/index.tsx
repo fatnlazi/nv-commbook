@@ -1,16 +1,27 @@
-import React from 'react';
-import { Image, ImageStyle, StyleSheet, View, ViewStyle } from 'react-native';
+import React, { memo } from 'react';
+import {
+  LayoutChangeEvent,
+  Image,
+  ImageStyle,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from 'react-native';
 import * as styles from '../../styles';
 
-export default function ImageView({
-  styleView = {},
-  styleImage = {},
-  uri = '',
-}: {
+export type ImageViewProps = {
   styleView?: ViewStyle;
   styleImage?: ImageStyle;
   uri?: string;
-}) {
+  onLayout?: ((event: LayoutChangeEvent) => void) | undefined;
+};
+
+const ImageView = ({
+  styleView = {},
+  styleImage = {},
+  uri = '',
+  onLayout = undefined,
+}: ImageViewProps) => {
   const style = StyleSheet.create({
     view: {
       ...styles.image.view,
@@ -23,8 +34,10 @@ export default function ImageView({
   });
 
   return (
-    <View style={style.view}>
-      <Image style={style.image} source={{ uri: uri }} />
+    <View style={style.view} onLayout={onLayout}>
+      <Image style={style.image} source={{ uri }} />
     </View>
   );
-}
+};
+
+export default memo(ImageView);
